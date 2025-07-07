@@ -36,10 +36,9 @@ const LinkShortener = () => {
 
   return (
     <>
-      <div className="h-screen flex items-center justify-center font-inter">
-        <div className="linkBox flex flex-col bg-white shadow-md shadow-black border p-5 rounded-2xl">
-
-          <div className="link-box-wrapper rounded-xl p-5 bg-blue-500">
+      <div className="flex-1 flex items-center justify-center font-inter py-8">
+        <div className="linkBox flex flex-col bg-white shadow-md shadow-black border md:p-10 p-5 rounded-2xl">
+          <div className="link-box-wrapper rounded-xl md:p-10 p-5 bg-blue-500">
             <p className="text-xl text-center font-bold text-white">Paste the URL to be shortened</p>
             <div className="input-wrapper mt-4">
               <input onChange={handleLinkInput} value={link} className="focus:outline-none rounded-xs p-1.5 mr-2 bg-white" placeholder="enter the link" type="text" />
@@ -50,21 +49,14 @@ const LinkShortener = () => {
           <div className="links p-5">
             <ul>
               {
-                shortlink && <li className="mb-2 p-2 bg-blue-500 rounded-lg">
+                shortlink && <li className="mb-2 bg-blue-500 rounded-lg p-3">
                 <div className="flex-box flex justify-between items-center">
                   <p ref={linkRef} className="text-white">{shortlink}</p>
-                  <button onClick={handleCopy} className="bg-white p-1 rounded-lg text-blue-600   text-base">copy</button>
+                  <button onClick={handleCopy} className="bg-white px-3 py-2 rounded-lg text-blue-600 hover:bg-slate-200 text-base">copy</button>
                   <Toaster /> 
                 </div>
               </li>
               }
-              <li className="mb-2 p-2 bg-blue-500 rounded-lg">
-                <div className="flex-box flex justify-between items-center">
-                  <p ref={linkRef} className="text-white">https://github.com/vishwaravi</p>
-                  <button onClick={handleCopy} className="bg-white p-1 rounded-lg text-blue-600   text-base">copy</button>
-                  <Toaster /> 
-                </div>
-              </li>
             </ul>
           </div>
         </div>
