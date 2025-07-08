@@ -15,7 +15,8 @@ app.use(cors({
 
 app.get('/home',(req,res) => {
   res.json({
-    msg:"Hello"
+    msg:"Hello",
+    origin:CORS_ORIGIN
   })
 })
 
