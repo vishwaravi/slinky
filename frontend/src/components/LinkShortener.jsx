@@ -1,9 +1,11 @@
 import { useState,useRef } from "react";
 import toast, {Toaster} from 'react-hot-toast'
 import api from "../apis/api.js";
+import {RefreshCcw} from 'lucide-react'
 const LinkShortener = () => {
   const [link,setLink] = useState('');
   const [shortlink,setShortLink] = useState('')
+  const[loading,setLoading]=useState(false);
 
   const handleLinkInput = (e) => {
     setLink(e.target.value);
@@ -25,12 +27,18 @@ const LinkShortener = () => {
   }
 
   const shortUrl = async (orglink) => {
-    console.log(import.meta.env.VITE_API_URL)
+    setLoading(true)
     const res = await api.post('/short',{
-      originalUrl:orglink
-    })
-    const reslink = await res.data.url
-    setShortLink(`${import.meta.env.VITE_API_URL}/${reslink}`)
+        originalUrl:orglink
+      })
+      
+      const reslink = await res.data.url
+
+      if(reslink){
+        setLoading(false)
+      }
+
+      setShortLink(`${import.meta.env.VITE_API_URL}/${reslink}`)
   }
 
   return (
@@ -48,13 +56,13 @@ const LinkShortener = () => {
           <div className="links p-5">
             <ul>
               {
-                shortlink && <li className="mb-2 bg-blue-500 rounded-lg p-3">
+                !loading && shortlink ? <li className="mb-2 bg-blue-500 rounded-lg p-3">
                 <div className="flex-box flex justify-between items-center">
                   <p ref={linkRef} className="text-white">{shortlink}</p>
                   <button onClick={handleCopy} className="bg-white px-3 py-2 rounded-lg text-blue-600 hover:bg-slate-200 text-base">copy</button>
                   <Toaster /> 
                 </div>
-              </li>
+              </li> : loading ? <div className="flex-box flex items-center justify-center"><RefreshCcw className="animate-spin size-8" /></div> :<></>
               }
             </ul>
           </div>
