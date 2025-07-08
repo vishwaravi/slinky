@@ -1,6 +1,6 @@
 import { useState,useRef } from "react";
 import toast, {Toaster} from 'react-hot-toast'
-import axios from "axios";
+import api from "../apis/api.js";
 const LinkShortener = () => {
   const [link,setLink] = useState('');
   const [shortlink,setShortLink] = useState('')
@@ -16,7 +16,6 @@ const LinkShortener = () => {
       duration:1500,
       icon:'✅'
     })
-    console.log(import.meta.env.VITE_API_URL)
   }
 
   const handleCopy = async () => {
@@ -26,12 +25,12 @@ const LinkShortener = () => {
   }
 
   const shortUrl = async (orglink) => {
-    const res = await axios.post('http://localhost:5000/short',{
+    console.log(import.meta.env.VITE_API_URL)
+    const res = await api.post('/short',{
       originalUrl:orglink
     })
-    console.log(res)
     const reslink = await res.data.url
-    setShortLink(`http://localhost:5000/${reslink}`)
+    setShortLink(`${import.meta.env.VITE_API_URL}/${reslink}`)
   }
 
   return (
