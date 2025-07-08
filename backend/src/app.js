@@ -13,6 +13,12 @@ app.use(cors({
   credentials:true
 }))
 
+app.get('/home',(req,res) => {
+  res.json({
+    msg:"Hello"
+  })
+})
+
 app.use(express.json())
 
 app.use(urlRouter)
