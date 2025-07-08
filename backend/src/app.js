@@ -7,7 +7,7 @@ dotenv.config();
 
 const CORS_ORIGIN = process.env.CORS_ORIGIN
 const app = express();
-
+console.log(CORS_ORIGIN)
 app.use(cors({
   origin:CORS_ORIGIN,
   credentials:true
