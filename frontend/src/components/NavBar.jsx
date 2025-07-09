@@ -22,11 +22,9 @@ const NavBar = () => {
           {
             navItems.map(([name, path]) => {
               return (
-                <a href={path}>
-                  <li key={name} className='hover:text-blue-600 cursor-pointer'>
-                    {name}
-                  </li>
-                </a>
+                <li>
+                  <Link className='hover:text-blue-600 cursor-pointer' to={path} key={name}>{name}</Link>
+                </li>
 
               )
             })
@@ -43,15 +41,17 @@ const NavBar = () => {
       {
         menuOpen && <ul className='md:hidden bg-white mt-2 space-y-2 px-4 border-b shadow text-gray-700'>
           {
-            navItems.map(([name,path]) => {
+            navItems.map(([name, path]) => {
               return (
                 // <a href={path}>
                 //   <li key={name} className='hover:text-blue-600 cursor-pointer'>
                 //   {name}
                 // </li>
                 // </a>
-                <Link className='hover:text-blue-600 cursor-pointer' to={path} key={name}>{name}</Link>
-                
+                <li>
+                  <Link className='hover:text-blue-600 cursor-pointer' to={path} key={name}>{name}</Link>
+                </li>
+
               )
             })
           }
