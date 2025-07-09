@@ -44,12 +44,12 @@ const LinkShortener = () => {
   return (
     <>
       <div className="flex-1 flex items-center justify-center font-inter py-8">
-        <div className="linkBox flex flex-col bg-white shadow-md shadow-black border md:p-10 p-5 rounded-2xl">
-          <div className="link-box-wrapper rounded-xl md:p-10 p-5 bg-blue-500">
+        <div className="linkBox flex flex-col shadow-md shadow-black border md:p-10 p-5 rounded-2xl">
+          <div className="link-box-wrapper rounded-xl md:p-15 md:m-10 p-5 bg-blue-500">
             <p className="text-xl text-center font-bold text-white">Paste the URL to be shortened</p>
             <div className="input-wrapper mt-4">
-              <input onChange={handleLinkInput} value={link} className="focus:outline-none rounded-xs p-1.5 mr-2 bg-white" placeholder="enter the link" type="text" />
-              <button onClick={() => shortUrl(link)} className="btn bg-white p-1.5 text-blue-700 rounded-xs hover:bg-slate-200">shorten url</button>
+              <input onChange={handleLinkInput} value={link} className="focus:outline-none rounded-xs md:p-3.5 p-1.5 mr-2 bg-white" placeholder="enter the link" type="text" />
+              <button onClick={() => shortUrl(link)} className="btn bg-white md:p-3 p-1.5 md:text-lg text-blue-700 rounded-xs hover:bg-slate-200">shorten url</button>
             </div>
           </div>
 

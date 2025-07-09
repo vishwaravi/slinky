@@ -15,18 +15,23 @@
 
 ---
 
+## 🔴 Live Demo : [click here](https://slinky-frontend.vercel.app/)
+
 ## 👨🏻‍💻 Setup :
 
 ### Clone the Repo : 
 
-```
+```javascript
+
   # Clone the repository
   git clone --depth=1 https://github.com/vishwaravi/slinky.git
 
 ```
 
 ### Backend Setup
+
 ```javascript
+
   cd slinky/backend
 
   # Install dependencies
@@ -34,6 +39,7 @@
 
   # Run the Server
   npm run dev
+
 ```
 > Make Sure you Configure the env variables in the `.env` file.
 
@@ -50,3 +56,55 @@
   npm run dev
 
 ```
+
+### Environment Variables
+
+
+#### Frontend
+
+```javascript
+
+# BACKEND API URL
+VITE_API_URL=http://localhost:5000
+
+```
+
+#### Backend 
+
+```javascript
+
+# Environment variables for local development
+# Copy this file to .env and fill in your actual values
+
+# Database
+MONGODB_URI=mongodb://localhost:27017/slinky
+# or for MongoDB Atlas:
+# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/slinky
+
+# Server
+PORT=5000
+
+# CORS
+CORS_ORIGIN=http://localhost:5173
+
+```
+### 📸  Screen Shots
+
+#### Home Page
+![home](assets/home.png)
+
+#### About Page
+![about](assets/about.png)
+
+#### Not Found Page
+![404-error](assets/404.png)
+
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+### 🚀 Give Star if you like this
+
