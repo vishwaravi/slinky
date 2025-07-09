@@ -39,15 +39,10 @@ const NavBar = () => {
         </div>
       </nav>
       {
-        menuOpen && <ul className='md:hidden bg-white mt-2 space-y-2 px-4 border-b shadow text-gray-700'>
+        menuOpen && <ul className='md:hidden bg-white mt-2 space-y-2 px-4 border-b shadow text-gray-700 py-4'>
           {
             navItems.map(([name, path]) => {
               return (
-                // <a href={path}>
-                //   <li key={name} className='hover:text-blue-600 cursor-pointer'>
-                //   {name}
-                // </li>
-                // </a>
                 <li>
                   <Link className='hover:text-blue-600 cursor-pointer' to={path} key={name}>{name}</Link>
                 </li>

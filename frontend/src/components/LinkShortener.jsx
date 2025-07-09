@@ -5,10 +5,12 @@ import {RefreshCcw} from 'lucide-react'
 const LinkShortener = () => {
   const [link,setLink] = useState('');
   const [shortlink,setShortLink] = useState('')
-  const[loading,setLoading]=useState(false);
+  const [loading,setLoading]=useState(false);
+  const [isInputEmpty,setInputEmpty] = useState(false)
 
   const handleLinkInput = (e) => {
     setLink(e.target.value);
+    setInputEmpty(false)
   }
 
   const linkRef = useRef();
@@ -27,7 +29,12 @@ const LinkShortener = () => {
   }
 
   const shortUrl = async (orglink) => {
-    setLoading(true)
+    if(!orglink){
+      setInputEmpty(true)
+      return
+    }
+
+      setLoading(true)
     const res = await api.post('/short',{
         originalUrl:orglink
       })
@@ -37,20 +44,22 @@ const LinkShortener = () => {
       if(reslink){
         setLoading(false)
       }
-
       setShortLink(`${import.meta.env.VITE_API_URL}/${reslink}`)
+      
+      return true;
   }
 
   return (
     <>
       <div className="flex-1 flex items-center justify-center font-inter py-8">
-        <div className="linkBox flex flex-col shadow-md shadow-black border md:p-10 p-5 rounded-2xl">
-          <div className="link-box-wrapper rounded-xl md:p-15 md:m-10 p-5 bg-blue-500">
+        <div className="linkBox flex flex-col shadow-md shadow-black border md:p-10 p-2 rounded-2xl">
+          <div className="link-box-wrapper rounded-xl md:p-15 md:m-10 p-2 bg-blue-500">
             <p className="text-xl text-center font-bold text-white">Paste the URL to be shortened</p>
-            <div className="input-wrapper mt-4">
-              <input onChange={handleLinkInput} value={link} className="focus:outline-none rounded-xs md:p-3.5 p-1.5 mr-2 bg-white" placeholder="enter the link" type="text" />
-              <button onClick={() => shortUrl(link)} className="btn bg-white md:p-3 p-1.5 md:text-lg text-blue-700 rounded-xs hover:bg-slate-200">shorten url</button>
+            <div className="input-wrapper mt-4 space-x-3 my-4">
+              <input onChange={handleLinkInput} value={link} className="focus:outline-none rounded-xs md:p-3.5 p-1 bg-white" placeholder="enter the link" type="text" />
+              <button type="submit" onClick={() => shortUrl(link)} className="btn bg-white md:p-3 p-1 md:text-lg text-blue-700 rounded-xs hover:bg-slate-200">shorten url</button>
             </div>
+            {isInputEmpty && <p className="text-red-600">Enter Link First</p>}
           </div>
 
           <div className="links p-5">
