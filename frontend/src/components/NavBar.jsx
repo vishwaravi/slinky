@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Menu, X, Github } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
 
@@ -44,11 +45,12 @@ const NavBar = () => {
           {
             navItems.map(([name,path]) => {
               return (
-                <a href={path}>
-                  <li key={name} className='hover:text-blue-600 cursor-pointer'>
-                  {name}
-                </li>
-                </a>
+                // <a href={path}>
+                //   <li key={name} className='hover:text-blue-600 cursor-pointer'>
+                //   {name}
+                // </li>
+                // </a>
+                <Link className='hover:text-blue-600 cursor-pointer' to={path} key={name}>{name}</Link>
                 
               )
             })
