@@ -32,7 +32,7 @@ const LinkShortener = () => {
     if(!orglink){
       setInputEmpty(true)
       return
-    }
+    } 
 
       setLoading(true)
     const res = await api.post('/short',{
