@@ -23,7 +23,7 @@ const LinkShortener = () => {
   }
 
   const notifyToWaitBeforeRequest = () => {
-    toast('Too many requests, please try again after 10s.', {
+    toast('Too many requests, please try again after a minute.', {
       duration: 2000,
       icon: '⚠️'
     })
