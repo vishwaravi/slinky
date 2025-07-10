@@ -1,12 +1,12 @@
-import { useState,useRef } from "react";
-import toast, {Toaster} from 'react-hot-toast'
+import { useState, useRef } from "react";
+import toast, { Toaster } from 'react-hot-toast'
 import api from "../apis/api.js";
-import {RefreshCcw} from 'lucide-react'
+import { RefreshCcw } from 'lucide-react'
 const LinkShortener = () => {
-  const [link,setLink] = useState('');
-  const [shortlink,setShortLink] = useState('')
-  const [loading,setLoading]=useState(false);
-  const [isInputEmpty,setInputEmpty] = useState(false)
+  const [link, setLink] = useState('');
+  const [shortlink, setShortLink] = useState('')
+  const [loading, setLoading] = useState(false);
+  const [isInputEmpty, setInputEmpty] = useState(false)
 
   const handleLinkInput = (e) => {
     setLink(e.target.value);
@@ -16,37 +16,50 @@ const LinkShortener = () => {
   const linkRef = useRef();
 
   const notifyCopied = () => {
-    toast('Link Copied',{
-      duration:1500,
-      icon:'✅'
+    toast('Link Copied', {
+      duration: 1500,
+      icon: '✅'
+    })
+  }
+
+  const notifyToWaitBeforeRequest = () => {
+    toast('Too many requests, please try again after 10s.', {
+      duration: 2000,
+      icon: '⚠️'
     })
   }
 
   const handleCopy = async () => {
-      const link = linkRef.current.textContent
-      await navigator.clipboard.writeText(link)
-      notifyCopied()
+    const link = linkRef.current.textContent
+    await navigator.clipboard.writeText(link)
+    notifyCopied()
   }
 
   const shortUrl = async (orglink) => {
-    if(!orglink){
-      setInputEmpty(true)
-      return
-    } 
+    try {
+      if (!orglink) {
+        setInputEmpty(true)
+        return
+      }
 
       setLoading(true)
-    const res = await api.post('/short',{
-        originalUrl:orglink
+      const res = await api.post('/short', {
+        originalUrl: orglink
       })
-      
+
       const reslink = await res.data.url
 
-      if(reslink){
+      if (reslink) {
         setLoading(false)
       }
       setShortLink(`${import.meta.env.VITE_API_URL}/${reslink}`)
-      
-      return true;
+
+    } catch (err) {
+      setLoading(false)
+      if (err.status === 429) {
+        notifyToWaitBeforeRequest();
+      }
+    }
   }
 
   return (
@@ -66,12 +79,12 @@ const LinkShortener = () => {
             <ul>
               {
                 !loading && shortlink ? <li className="mb-2 bg-blue-500 rounded-lg p-3">
-                <div className="flex-box flex justify-between items-center">
-                  <p ref={linkRef} className="text-white">{shortlink}</p>
-                  <button onClick={handleCopy} className="bg-white px-3 py-2 rounded-lg text-blue-600 hover:bg-slate-200 text-base">copy</button>
-                  <Toaster /> 
-                </div>
-              </li> : loading ? <div className="flex-box flex items-center justify-center"><RefreshCcw className="animate-spin size-8" /></div> :<></>
+                  <div className="flex-box flex justify-between items-center">
+                    <p ref={linkRef} className="text-white">{shortlink}</p>
+                    <button onClick={handleCopy} className="bg-white px-3 py-2 rounded-lg text-blue-600 hover:bg-slate-200 text-base">copy</button>
+                    <Toaster />
+                  </div>
+                </li> : loading ? <div className="flex-box flex items-center justify-center"><RefreshCcw className="animate-spin size-8" /></div> : <></>
               }
             </ul>
           </div>

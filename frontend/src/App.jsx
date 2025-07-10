@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import NotFound404 from './Pages/NotFound404';
 import About from './Pages/About';
 
-export default function ButtonUsage() {
+export default function App() {
   return (
     <Router>
       <Routes>

@@ -22,7 +22,7 @@ const NavBar = () => {
           {
             navItems.map(([name, path]) => {
               return (
-                <li>
+                <li key={name}>
                   <Link className='hover:text-blue-600 cursor-pointer' to={path} key={name}>{name}</Link>
                 </li>
 
