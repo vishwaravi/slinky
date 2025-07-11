@@ -6,7 +6,8 @@ const LinkShortener = () => {
   const [link, setLink] = useState('');
   const [shortlink, setShortLink] = useState('')
   const [loading, setLoading] = useState(false);
-  const [isInputEmpty, setInputEmpty] = useState(false)
+  const [isInputEmpty, setInputEmpty] = useState(false);
+  const [isManyReq,setManyReq] = useState(false);
 
   const handleLinkInput = (e) => {
     setLink(e.target.value);
@@ -51,14 +52,18 @@ const LinkShortener = () => {
 
       if (reslink) {
         setLoading(false)
+        setManyReq(false)
       }
       setShortLink(`${import.meta.env.VITE_API_URL}/${reslink}`)
 
     } catch (err) {
-      setLoading(false)
       if (err.status === 429) {
         notifyToWaitBeforeRequest();
       }
+      setLoading(false);
+      setManyReq(true);
+      setShortLink('');
+      console.log(isManyReq)
     }
   }
 
@@ -82,14 +87,17 @@ const LinkShortener = () => {
                   <div className="flex-box flex justify-between items-center">
                     <p ref={linkRef} className="text-white">{shortlink}</p>
                     <button onClick={handleCopy} className="bg-white px-3 py-2 rounded-lg text-blue-600 hover:bg-slate-200 text-base">copy</button>
-                    <Toaster />
                   </div>
-                </li> : loading ? <div className="flex-box flex items-center justify-center"><RefreshCcw className="animate-spin size-8" /></div> : <></>
+                </li> : loading ? <div className="flex-box flex items-center justify-center"><RefreshCcw className="animate-spin size-8" /></div>
+                      : !loading && isManyReq ?<div className="">
+                        <p className="text-red-600 text-xl text-center">Too Many Requests, Wait Before Sending Another</p>
+                      </div>:<></>
               }
             </ul>
           </div>
         </div>
       </div>
+      <Toaster />
     </>
   )
 }
