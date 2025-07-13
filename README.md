@@ -78,8 +78,6 @@ VITE_API_URL=http://localhost:5000
 
 # Database
 MONGODB_URI=mongodb://localhost:27017/slinky
-# or for MongoDB Atlas:
-# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/slinky
 
 # Server
 PORT=5000
