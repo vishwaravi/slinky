@@ -86,6 +86,33 @@ PORT=5000
 CORS_ORIGIN=http://localhost:5173
 
 ```
+---
+## API End Points :
+
+### `POST /short`
+
+- Description : short a url.
+- Request :
+
+  ```json
+  {
+    "originalUrl" : "https://example.com/posts"
+  }
+  ```
+- Response :
+  - `201 CREATED`
+
+    ```json
+    {
+      "url": "w1NLk64" //uri
+    }
+    ```
+---
+### `GET /:uri`
+- Description : Redirects to the destination Site
+
+---
+
 ### 📸  Screen Shots
 
 #### Home Page
