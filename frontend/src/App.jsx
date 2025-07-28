@@ -11,12 +11,14 @@ export default function App() {
     <Router>
       <Routes>
         <Route path='/' element={
-          <div className="min-h-screen flex flex-col">
+          <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
             <NavBar />
-            <div className="flex-1 flex flex-col">
-              <LinkShortener />
-              <Cards />
-            </div>
+            <main className="container mx-auto px-4 py-8">
+              <div className="max-w-6xl mx-auto space-y-16">
+                <LinkShortener />
+                <Cards />
+              </div>
+            </main>
           </div>
         } />
         
@@ -24,6 +26,5 @@ export default function App() {
         <Route path='*' element={<NotFound404 />} />
       </Routes>
     </Router>
-
   )
 }
